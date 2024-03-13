@@ -4,7 +4,7 @@
 
 This automation script is a demo of how to build a dynamic button panel using the IAS Toolkit.
 
-![buttonDialog](https://github.com/SkylineCommunications/SLC-AS-DynamicButtonList/assets/108457590/a082651f-b195-433b-a389-cc5bf3cc44d1)
+![buttonDialog](https://github.com/SkylineCommunications/SLC-AS-Example_InteractiveAutomationScriptToolkit/assets/108457590/fcab8c63-02c3-40a2-b1d6-c2961fffd7db)
 
 ### About DataMiner
 
