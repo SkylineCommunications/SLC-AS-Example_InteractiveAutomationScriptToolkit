@@ -4,7 +4,7 @@
 
 This automation script is a demo of how to filter options in a dropdown using the IAS Toolkit.
 
-![DropDownFilter](https://github.com/SkylineCommunications/SLC-AS-DropDownFilter/assets/108457590/13cf27da-e03a-49ac-a9a8-7ae69fa07e61)
+![DropDownFilter](https://github.com/SkylineCommunications/SLC-AS-Example_InteractiveAutomationScriptToolkit/assets/108457590/ecf3c7a1-6a18-4f37-b063-4ffff55d4207)
 
 ### About DataMiner
 
