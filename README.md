@@ -2,7 +2,7 @@
 
 ## About
 
-This repository contains examples of interactive automation scripts that were made using the [Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit NuGet package](https://www.nuget.org/packages/Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit). 
+This repository contains examples of interactive automation scripts using the [Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit NuGet package](https://www.nuget.org/packages/Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit). 
 
 The goal of these examples is to answer frequently asked questions, showcase certain functionalities and inspire users to create their own automation scripts.
 
