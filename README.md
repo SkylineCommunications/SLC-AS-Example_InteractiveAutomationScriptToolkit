@@ -4,15 +4,15 @@
 
 This repository contains examples of interactive automation scripts using the [Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit NuGet package](https://www.nuget.org/packages/Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit). 
 
-The goal of these examples is to answer frequently asked questions, showcase certain functionalities and inspire users to create their own automation scripts.
+The goal of these examples is to answer frequently asked questions, showcase certain functionalities, and inspire users to create their own automation scripts.
 
-This package can be deployed straight to your cloud connected DataMiner system from the [DataMiner Catalog](https://catalog.dataminer.services/).
+This package can be deployed straight to your DataMiner system from the [DataMiner Catalog](https://catalog.dataminer.services/details/automation-script/5967).
 
 ### About DataMiner
 
 DataMiner is a transformational platform that provides vendor-independent control and monitoring of devices and services. Out of the box and by design, it addresses key challenges such as security, complexity, multi-cloud, and much more. It has a pronounced open architecture and powerful capabilities enabling users to evolve easily and continuously.
 
-The foundation of DataMiner is its powerful and versatile data acquisition and control layer. With DataMiner, there are no restrictions to what data users can access. Data sources may reside on premises, in the cloud, or in a hybrid setup.
+The foundation of DataMiner is its powerful and versatile data acquisition and control layer. With DataMiner, there are no restrictions on what data users can access. Data sources may reside on-premises, in the cloud, or in a hybrid setup.
 
 A unique catalog of 7000+ connectors already exists. In addition, you can leverage DataMiner Development Packages to build your own connectors (also known as "protocols" or "drivers").
 
