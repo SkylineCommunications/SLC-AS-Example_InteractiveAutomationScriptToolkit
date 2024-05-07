@@ -4,6 +4,7 @@
 
 This automation script is a basic demo of how to use a CheckBoxList. A CheckBoxList allows users to select zero or more options from a predefined list. The script shows developers how to define the options and how to handle changes.
 
+![CheckBoxList_705](https://github.com/SkylineCommunications/SLC-AS-Example_InteractiveAutomationScriptToolkit/assets/108457590/e00189a9-ce1b-476c-a4bc-ccef7286bb4f)
 
 ### About DataMiner
 
