@@ -4,6 +4,8 @@
 
 This automation script is a basic demo of how to use InteractiveController.Hide() method. This method will hide interactive script and eventually close it if we don't show any dialog after all actions are done.
 
+![hideUi](https://github.com/user-attachments/assets/13473ec5-deff-4e2e-933f-b3255651e010)
+
 ### About DataMiner
 
 DataMiner is a transformational platform that provides vendor-independent control and monitoring of devices and services. Out of the box and by design, it addresses key challenges such as security, complexity, multi-cloud, and much more. It has a pronounced open architecture and powerful capabilities enabling users to evolve easily and continuously.
