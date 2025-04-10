@@ -29,5 +29,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Skyline.DataMiner.Dev.Automation" Version="10.3.7" />
   </ItemGroup>
 </Project>
