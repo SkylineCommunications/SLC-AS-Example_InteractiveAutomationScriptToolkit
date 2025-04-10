@@ -1,3 +1,5 @@
+// Ignore Spelling: IAS
+
 /*
 ****************************************************************************
 *  Copyright (c) 2024,  Skyline Communications NV  All Rights Reserved.    *
@@ -51,68 +53,76 @@ dd/mm/2024	1.0.0.1		XXX, Skyline	Initial version
 
 namespace IAS_CheckBoxList_1
 {
-    using System;
-    using Skyline.DataMiner.Automation;
-    using Skyline.DataMiner.Utils.InteractiveAutomationScript;
+	using System;
 
-    /// <summary>
-    /// Represents a DataMiner Automation script.
-    /// </summary>
-    public class Script
-    {
-        private InteractiveController app;
+	using Skyline.DataMiner.Automation;
+	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
-        /// <summary>
-        /// The Script entry point.
-        /// IEngine.ShowUI();.
-        /// </summary>
-        /// <param name="engine">Link with SLAutomation process.</param>
-        public void Run(IEngine engine)
-        {
-            try
-            {
-                app = new InteractiveController(engine);
+	/// <summary>
+	/// Represents a DataMiner Automation script.
+	/// </summary>
+	public class Script
+	{
+		private InteractiveController app;
 
-                engine.SetFlag(RunTimeFlags.NoKeyCaching);
-                engine.Timeout = TimeSpan.FromHours(10);
+		/// <summary>
+		/// The Script entry point.
+		/// IEngine.ShowUI();.
+		/// </summary>
+		/// <param name="engine">Link with SLAutomation process.</param>
+		public void Run(IEngine engine)
+		{
+			try
+			{
+				app = new InteractiveController(engine);
 
-                RunSafe(engine);
-            }
-            catch (ScriptAbortException)
-            {
-                throw;
-            }
-            catch (ScriptForceAbortException)
-            {
-                throw;
-            }
-            catch (ScriptTimeoutException)
-            {
-                throw;
-            }
-            catch (InteractiveUserDetachedException)
-            {
-                throw;
-            }
-            catch (Exception e)
-            {
-                engine.Log("Run|Something went wrong: " + e);
-                ShowExceptionDialog(engine, e);
-            }
-        }
+				engine.SetFlag(RunTimeFlags.NoKeyCaching);
+				engine.Timeout = TimeSpan.FromHours(10);
 
-        private void RunSafe(IEngine engine)
-        {
-            CheckBoxListDialog dialog = new CheckBoxListDialog(engine);
-            dialog.OnExitButtonPressed += (s, e) => engine.ExitSuccess("Exit button pressed");
-            app.Run(dialog);
-        }
+				RunSafe(engine);
+			}
+			catch (ScriptAbortException)
+			{
+				throw;
+			}
+			catch (ScriptForceAbortException)
+			{
+				throw;
+			}
+			catch (ScriptTimeoutException)
+			{
+				throw;
+			}
+			catch (InteractiveUserDetachedException)
+			{
+				throw;
+			}
+			catch (Exception e)
+			{
+				engine.Log("Run|Something went wrong: " + e);
+				ShowExceptionDialog(engine, e);
+			}
+		}
 
-        private void ShowExceptionDialog(IEngine engine, Exception exception)
-        {
-            ExceptionDialog exceptionDialog = new ExceptionDialog(engine, exception);
-            exceptionDialog.OkButton.Pressed += (sender, args) => engine.ExitFail("Something went wrong.");
-            if (app.IsRunning) app.ShowDialog(exceptionDialog); else app.Run(exceptionDialog);
-        }
-    }
+		private void RunSafe(IEngine engine)
+		{
+			CheckBoxListDialog dialog = new CheckBoxListDialog(engine);
+			dialog.OnExitButtonPressed += (s, e) => engine.ExitSuccess("Exit button pressed");
+			app.Run(dialog);
+		}
+
+		private void ShowExceptionDialog(IEngine engine, Exception exception)
+		{
+			ExceptionDialog exceptionDialog = new ExceptionDialog(engine, exception);
+			exceptionDialog.OkButton.Pressed += (sender, args) => engine.ExitFail("Something went wrong.");
+			if (app.IsRunning)
+			{
+				app.ShowDialog(exceptionDialog);
+			}
+			else
+			{
+				app.Run(exceptionDialog);
+			}
+		}
+	}
 }

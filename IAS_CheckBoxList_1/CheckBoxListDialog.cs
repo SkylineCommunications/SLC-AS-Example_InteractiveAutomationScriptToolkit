@@ -1,47 +1,52 @@
-﻿namespace IAS_CheckBoxList_1
+﻿// Ignore Spelling: IAS
+
+namespace IAS_CheckBoxList_1
 {
-    using Skyline.DataMiner.Automation;
-    using Skyline.DataMiner.Utils.InteractiveAutomationScript;
-    using System;
-    using System.Collections.Generic;
+	using System;
+	using System.Collections.Generic;
 
-    public class CheckBoxListDialog : Dialog
-    {
-        private readonly CheckBoxList checkBoxList;
-        private readonly TextBox checkedOptionsTextBox;
-        private readonly Button exitButton;
+	using Skyline.DataMiner.Automation;
+	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
-        private readonly IEnumerable<string> options = new string[]
-        {
-            "Yes",
-            "An Option",
-            "Another One",
-            "Option X",
-            "Something something Dark Side"
-        };
+	public class CheckBoxListDialog : Dialog
+	{
+		private readonly CheckBoxList checkBoxList;
 
-        public CheckBoxListDialog(IEngine engine) : base(engine)
-        {
-            Title = "Select Option(s)";
+		private readonly TextBox checkedOptionsTextBox;
 
-            // Set up checkboxlist
-            checkBoxList = new CheckBoxList(options) { IsSorted = true };
-            checkBoxList.Changed += (s, e) => checkedOptionsTextBox.Text = String.Join(Environment.NewLine, checkBoxList.Checked);
+		private readonly Button exitButton;
 
-            // Set up textbox
-            checkedOptionsTextBox = new TextBox { IsMultiline = true, Height = 150 };
+		private readonly IEnumerable<string> options = new[]
+		{
+			"Yes",
+			"An Option",
+			"Another One",
+			"Option X",
+			"Something something Dark Side",
+		};
 
-            // Set up exit button
-            exitButton = new Button("Exit");
-            exitButton.Pressed += (s, e) => OnExitButtonPressed?.Invoke(this, EventArgs.Empty);
+		public CheckBoxListDialog(IEngine engine) : base(engine)
+		{
+			Title = "Select Option(s)";
 
-            // Generate Ui
-            AddWidget(new Label("Select Option(s)"), 0, 0, verticalAlignment: VerticalAlignment.Top);
-            AddWidget(checkBoxList, 0, 1);
-            AddWidget(checkedOptionsTextBox, 1, 0, 1, 2);
-            AddWidget(exitButton, 2, 0, 1, 2);
-        }
+			// Set up checkboxlist
+			checkBoxList = new CheckBoxList(options) { IsSorted = true };
+			checkBoxList.Changed += (s, e) => checkedOptionsTextBox.Text = String.Join(Environment.NewLine, checkBoxList.Checked);
 
-        public event EventHandler OnExitButtonPressed;
-    }
+			// Set up textbox
+			checkedOptionsTextBox = new TextBox { IsMultiline = true, Height = 150 };
+
+			// Set up exit button
+			exitButton = new Button("Exit");
+			exitButton.Pressed += (s, e) => OnExitButtonPressed?.Invoke(this, EventArgs.Empty);
+
+			// Generate Ui
+			AddWidget(new Label("Select Option(s)"), 0, 0, verticalAlignment: VerticalAlignment.Top);
+			AddWidget(checkBoxList, 0, 1);
+			AddWidget(checkedOptionsTextBox, 1, 0, 1, 2);
+			AddWidget(exitButton, 2, 0, 1, 2);
+		}
+
+		public event EventHandler OnExitButtonPressed;
+	}
 }

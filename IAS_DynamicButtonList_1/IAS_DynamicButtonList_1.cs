@@ -1,3 +1,5 @@
+// Ignore Spelling: IAS
+
 /*
 ****************************************************************************
 *  Copyright (c) 2024,  Skyline Communications NV  All Rights Reserved.    *
@@ -51,86 +53,92 @@ DATE		VERSION		AUTHOR			COMMENTS
 
 namespace IAS_DynamicButtonList_1
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Text;
-    using Skyline.DataMiner.Automation;
-    using Skyline.DataMiner.Core.DataMinerSystem.Automation;
-    using Skyline.DataMiner.Core.DataMinerSystem.Common;
-    using Skyline.DataMiner.Utils.InteractiveAutomationScript;
+	using System;
+	using System.Linq;
 
-    /// <summary>
-    /// Represents a DataMiner Automation script.
-    /// </summary>
-    public class Script
-    {
-        private InteractiveController app;
-        private IEngine engine;
+	using Skyline.DataMiner.Automation;
+	using Skyline.DataMiner.Core.DataMinerSystem.Automation;
+	using Skyline.DataMiner.Core.DataMinerSystem.Common;
+	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
-        private DynamicButtonPanel dynamicButtonPanel;
+	/// <summary>
+	/// Represents a DataMiner Automation script.
+	/// </summary>
+	public class Script
+	{
+		private InteractiveController app;
 
-        /// <summary>
-        /// The Script entry point.
-        /// IEngine.ShowUI();.
-        /// </summary>
-        /// <param name="engine">Link with SLAutomation process.</param>
-        public void Run(IEngine engine)
-        {
-            try
-            {
-                app = new InteractiveController(engine);
-                this.engine = engine;
+		private IEngine engine;
 
-                engine.SetFlag(RunTimeFlags.NoKeyCaching);
-                engine.Timeout = TimeSpan.FromHours(10);
+		private DynamicButtonPanel dynamicButtonPanel;
 
-                RunSafe();
-            }
-            catch (ScriptAbortException)
-            {
-                throw;
-            }
-            catch (ScriptForceAbortException)
-            {
-                throw;
-            }
-            catch (ScriptTimeoutException)
-            {
-                throw;
-            }
-            catch (InteractiveUserDetachedException)
-            {
-                throw;
-            }
-            catch (Exception e)
-            {
-                engine.Log("Run|Something went wrong: " + e);
-                ShowExceptionDialog(engine, e);
-            }
-        }
+		/// <summary>
+		/// The Script entry point.
+		/// IEngine.ShowUI();.
+		/// </summary>
+		/// <param name="engine">Link with SLAutomation process.</param>
+		public void Run(IEngine engine)
+		{
+			try
+			{
+				app = new InteractiveController(engine);
+				this.engine = engine;
 
-        private void RunSafe()
-        {
-            var dms = engine.GetDms();
-            dynamicButtonPanel = new DynamicButtonPanel(engine, dms.GetElements().Where(x => x.State == ElementState.Active));
-            dynamicButtonPanel.OnElementSelected += (s, e) => Dialog_OnElementSelected(e.SelectedElement);
-            app.Run(dynamicButtonPanel);
-        }
+				engine.SetFlag(RunTimeFlags.NoKeyCaching);
+				engine.Timeout = TimeSpan.FromHours(10);
 
-        private void Dialog_OnElementSelected(IDmsElement selectedElement)
-        {
-            MessageDialog messageDialog = new MessageDialog(engine, $"User selected element {selectedElement.Name}.") { Title = "Element Selected" };
-            messageDialog.OkButton.Pressed += (s, e) => app.ShowDialog(dynamicButtonPanel);
-            app.ShowDialog(messageDialog);
-        }
+				RunSafe();
+			}
+			catch (ScriptAbortException)
+			{
+				throw;
+			}
+			catch (ScriptForceAbortException)
+			{
+				throw;
+			}
+			catch (ScriptTimeoutException)
+			{
+				throw;
+			}
+			catch (InteractiveUserDetachedException)
+			{
+				throw;
+			}
+			catch (Exception e)
+			{
+				engine.Log("Run|Something went wrong: " + e);
+				ShowExceptionDialog(engine, e);
+			}
+		}
 
-        private void ShowExceptionDialog(IEngine engine, Exception exception)
-        {
-            ExceptionDialog exceptionDialog = new ExceptionDialog(engine, exception);
-            exceptionDialog.OkButton.Pressed += (sender, args) => engine.ExitFail("Something went wrong.");
-            if (app.IsRunning) app.ShowDialog(exceptionDialog); else app.Run(exceptionDialog);
-        }
-    }
+		private void RunSafe()
+		{
+			var dms = engine.GetDms();
+			dynamicButtonPanel = new DynamicButtonPanel(engine, dms.GetElements().Where(x => x.State == ElementState.Active));
+			dynamicButtonPanel.OnElementSelected += (s, e) => Dialog_OnElementSelected(e.SelectedElement);
+			app.Run(dynamicButtonPanel);
+		}
+
+		private void Dialog_OnElementSelected(IDmsElement selectedElement)
+		{
+			MessageDialog messageDialog = new MessageDialog(engine, $"User selected element {selectedElement.Name}.") { Title = "Element Selected" };
+			messageDialog.OkButton.Pressed += (s, e) => app.ShowDialog(dynamicButtonPanel);
+			app.ShowDialog(messageDialog);
+		}
+
+		private void ShowExceptionDialog(IEngine engine, Exception exception)
+		{
+			ExceptionDialog exceptionDialog = new ExceptionDialog(engine, exception);
+			exceptionDialog.OkButton.Pressed += (sender, args) => engine.ExitFail("Something went wrong.");
+			if (app.IsRunning)
+			{
+				app.ShowDialog(exceptionDialog);
+			}
+			else
+			{
+				app.Run(exceptionDialog);
+			}
+		}
+	}
 }

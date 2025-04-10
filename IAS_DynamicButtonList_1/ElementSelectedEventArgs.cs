@@ -1,15 +1,16 @@
 ﻿namespace IAS_DynamicButtonList_1
 {
-    using System;
-    using Skyline.DataMiner.Core.DataMinerSystem.Common;
+	using System;
 
-    public class ElementSelectedEventArgs : EventArgs
-    {
-        public ElementSelectedEventArgs(IDmsElement element)
-        {
-            SelectedElement = element;
-        }
+	using Skyline.DataMiner.Core.DataMinerSystem.Common;
 
-        public IDmsElement SelectedElement { get; private set; }
-    }
+	public class ElementSelectedEventArgs : EventArgs
+	{
+		public ElementSelectedEventArgs(IDmsElement element)
+		{
+			SelectedElement = element;
+		}
+
+		public IDmsElement SelectedElement { get; private set; }
+	}
 }

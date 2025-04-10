@@ -1,81 +1,89 @@
-﻿namespace IAS_DynamicButtonList_1
+﻿// Ignore Spelling: IAS
+
+namespace IAS_DynamicButtonList_1
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Skyline.DataMiner.Automation;
-    using Skyline.DataMiner.Core.DataMinerSystem.Common;
-    using Skyline.DataMiner.Utils.InteractiveAutomationScript;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
 
-    public class DynamicButtonPanel : Dialog
-    {
-        private const int MaxColumns = 3;
+	using Skyline.DataMiner.Automation;
+	using Skyline.DataMiner.Core.DataMinerSystem.Common;
+	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
-        private readonly Dictionary<Button, IDmsElement> selectableElements = new Dictionary<Button, IDmsElement>();
-        private readonly TextBox filterTextBox = new TextBox { PlaceHolder = "Filter on Element Name..." };
+	public class DynamicButtonPanel : Dialog
+	{
+		private const int MaxColumns = 3;
 
-        public DynamicButtonPanel(IEngine engine, IEnumerable<IDmsElement> elements) : base(engine)
-        {
-            Title = "Select Element";
+		private readonly Dictionary<Button, IDmsElement> selectableElements = new Dictionary<Button, IDmsElement>();
 
-            Initialize(elements);
-            GenerateUi();
-        }
+		private readonly TextBox filterTextBox = new TextBox { PlaceHolder = "Filter on Element Name..." };
 
-        public event EventHandler<ElementSelectedEventArgs> OnElementSelected;
+		public DynamicButtonPanel(IEngine engine, IEnumerable<IDmsElement> elements) : base(engine)
+		{
+			Title = "Select Element";
 
-        private void Initialize(IEnumerable<IDmsElement> elements)
-        {
-            foreach (var element in elements)
-            {
-                Button button = new Button(element.Name);
-                button.Pressed += Button_Pressed;
+			Initialize(elements);
+			GenerateUi();
+		}
 
-                selectableElements[button] = element;
-            }
+		public event EventHandler<ElementSelectedEventArgs> OnElementSelected;
 
-            filterTextBox.Changed += FilterTextBox_Changed;
-        }
+		private void Initialize(IEnumerable<IDmsElement> elements)
+		{
+			foreach (var element in elements)
+			{
+				Button button = new Button(element.Name);
+				button.Pressed += Button_Pressed;
 
-        private void FilterTextBox_Changed(object sender, TextBox.TextBoxChangedEventArgs e)
-        {
-            GenerateUi();
-        }
+				selectableElements[button] = element;
+			}
 
-        private void Button_Pressed(object sender, EventArgs e)
-        {
-            // sender is button that got pressed
-            Button pressedButton = (Button)sender;
-            OnElementSelected?.Invoke(this, new ElementSelectedEventArgs(selectableElements[pressedButton]));
-        }
+			filterTextBox.Changed += FilterTextBox_Changed;
+		}
 
-        private void GenerateUi()
-        {
-            Clear();
+		private void FilterTextBox_Changed(object sender, TextBox.TextBoxChangedEventArgs e)
+		{
+			GenerateUi();
+		}
 
-            int row = -1;
-            AddWidget(filterTextBox, ++row, 0, 1, MaxColumns);
+		private void Button_Pressed(object sender, EventArgs e)
+		{
+			// sender is button that got pressed
+			Button pressedButton = (Button)sender;
+			OnElementSelected?.Invoke(this, new ElementSelectedEventArgs(selectableElements[pressedButton]));
+		}
 
-            var filteredButtons = selectableElements.Where(x => x.Value.Name.Contains(filterTextBox.Text)).Select(x => x.Key).ToList();
-            if (!filteredButtons.Any())
-            {
-                AddWidget(new Label("No elements matching filter"), row + 1, 0, 1, MaxColumns);
-                return;
-            }
+		private void GenerateUi()
+		{
+			Clear();
 
-            var orderedButtons = filteredButtons.OrderBy(x => x.Text).ToList();
-            int buttonIndex = 0;
-            row += 1;
-            while (buttonIndex < orderedButtons.Count)
-            {
-                for (int column = 0; column < MaxColumns; column++)
-                {
-                    if (buttonIndex < orderedButtons.Count) AddWidget(orderedButtons[buttonIndex], row, column);
-                    buttonIndex += 1;
-                }
+			int row = -1;
+			AddWidget(filterTextBox, ++row, 0, 1, MaxColumns);
 
-                row += 1;
-            }
-        }
-    }
+			var filteredButtons = selectableElements.Where(x => x.Value.Name.Contains(filterTextBox.Text)).Select(x => x.Key).ToList();
+			if (!filteredButtons.Any())
+			{
+				AddWidget(new Label("No elements matching filter"), row + 1, 0, 1, MaxColumns);
+				return;
+			}
+
+			var orderedButtons = filteredButtons.OrderBy(x => x.Text).ToList();
+			int buttonIndex = 0;
+			row += 1;
+			while (buttonIndex < orderedButtons.Count)
+			{
+				for (int column = 0; column < MaxColumns; column++)
+				{
+					if (buttonIndex < orderedButtons.Count)
+					{
+						AddWidget(orderedButtons[buttonIndex], row, column);
+					}
+
+					buttonIndex += 1;
+				}
+
+				row += 1;
+			}
+		}
+	}
 }

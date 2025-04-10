@@ -2,7 +2,7 @@
 
 /*
 ****************************************************************************
-*  Copyright (c) 2024,  Skyline Communications NV  All Rights Reserved.    *
+*  Copyright (c) 2025,  Skyline Communications NV  All Rights Reserved.    *
 ****************************************************************************
 
 By using this script, you expressly agree with the usage terms and
@@ -47,13 +47,17 @@ Revision History:
 
 DATE		VERSION		AUTHOR			COMMENTS
 
-27/02/2024	1.0.0.1		TRE, Skyline	Initial version
+10/04/2025	1.0.0.1		BDK, Skyline	Initial version
 ****************************************************************************
 */
 
-namespace IAS_DropDownFilter_1
+namespace IAS_ModelViewPresenter_1
 {
 	using System;
+
+	using IAS_ModelViewPresenter_1.Models;
+	using IAS_ModelViewPresenter_1.Presenters;
+	using IAS_ModelViewPresenter_1.Views;
 
 	using Skyline.DataMiner.Automation;
 	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
@@ -63,89 +67,92 @@ namespace IAS_DropDownFilter_1
 	/// </summary>
 	public class Script
 	{
-		private InteractiveController app;
-
-		private IEngine engine;
-
-		private DropDownFilterDialog dialog;
-
 		/// <summary>
-		/// The Script entry point.
-		/// IEngine.ShowUI();.
+		/// The script entry point.
 		/// </summary>
 		/// <param name="engine">Link with SLAutomation process.</param>
 		public void Run(IEngine engine)
 		{
+			/*
+             *    Note:
+             *    Do not remove the commented method below!
+             *    The line is needed to execute an interactive automation script from the non-interactive automation script.
+             *
+             *    engine.ShowUI();
+            */
+
 			try
 			{
-				app = new InteractiveController(engine);
-
-				this.engine = engine;
-				engine.SetFlag(RunTimeFlags.NoKeyCaching);
-				engine.Timeout = TimeSpan.FromHours(10);
-
 				RunSafe(engine);
 			}
 			catch (ScriptAbortException)
 			{
-				throw;
+				// Catch normal abort exceptions (engine.ExitFail or engine.ExitSuccess)
+				throw; // Comment if it should be treated as a normal exit of the script.
 			}
 			catch (ScriptForceAbortException)
 			{
+				// Catch forced abort exceptions, caused via external maintenance messages.
 				throw;
 			}
 			catch (ScriptTimeoutException)
 			{
+				// Catch timeout exceptions for when a script has been running for too long.
 				throw;
 			}
 			catch (InteractiveUserDetachedException)
 			{
+				// Catch a user detaching from the interactive script by closing the window.
+				// Only applicable for interactive scripts, can be removed for non-interactive scripts.
 				throw;
 			}
 			catch (Exception e)
 			{
-				engine.Log("Run|Something went wrong: " + e);
-				ShowExceptionDialog(engine, e);
+				engine.ExitFail("Run|Something went wrong: " + e);
 			}
 		}
 
 		private void RunSafe(IEngine engine)
 		{
-			dialog = new DropDownFilterDialog(engine);
-			dialog.OnElementSelected += Dialog_OnElementSelected;
-			dialog.OnExitButtonPressed += Dialog_OnExitButtonPressed;
-			app.Run(dialog);
-		}
+			var controller = new InteractiveController(engine);
 
-		private void Dialog_OnElementSelected(object sender, ElementSelectedEventArgs e)
-		{
-			var messageDialog = new MessageDialog(engine, $"You selected element {e.ElementName}.") { Title = "Selected Element" };
-			messageDialog.OkButton.Pressed += MessageDialog_OkButton_Pressed;
-			app.ShowDialog(messageDialog);
-		}
+			// Define models
+			var userModel = new UserInfoModel();
 
-		private void MessageDialog_OkButton_Pressed(object sender, EventArgs e)
-		{
-			app.ShowDialog(dialog);
-		}
+			// Define views
+			var loginView = new LoginView(engine);
+			var userInfoView = new UserInfoView(engine);
+			var logoutView = new LogoutView(engine);
 
-		private void Dialog_OnExitButtonPressed(object sender, EventArgs e)
-		{
-			engine.ExitSuccess("Exit");
-		}
+			// Define presenters
+			var loginPresenter = new LoginPresenter(loginView, userModel);
+			var userInfoPresenter = new UserInfoPresenter(userInfoView, userModel);
+			var logoutPresenter = new LogoutPresenter(logoutView, userModel);
 
-		private void ShowExceptionDialog(IEngine engine, Exception exception)
-		{
-			ExceptionDialog exceptionDialog = new ExceptionDialog(engine, exception);
-			exceptionDialog.OkButton.Pressed += (sender, args) => engine.ExitFail("Something went wrong.");
-			if (app.IsRunning)
+			// Define model-view-presenter events
+			loginPresenter.Cancel += (s, e) =>
 			{
-				app.ShowDialog(exceptionDialog);
-			}
-			else
+				controller.Engine.ExitSuccess("Canceled");
+			};
+			loginPresenter.Login += (s, e) =>
 			{
-				app.Run(exceptionDialog);
-			}
+				userInfoPresenter.LoadFromModel();
+				controller.ShowDialog(userInfoView);
+			};
+
+			userInfoPresenter.Logout += (s, e) =>
+			{
+				logoutPresenter.LoadFromModel();
+				controller.ShowDialog(logoutView);
+			};
+
+			logoutPresenter.Finish += (s, e) =>
+			{
+				controller.Engine.ExitSuccess("Finish");
+			};
+
+			// Start first view
+			controller.Run(loginView);
 		}
 	}
 }
