@@ -1,42 +1,44 @@
 ﻿namespace IAS_DropDownFilter_1
 {
-    using System;
-    using System.Linq;
-    using Skyline.DataMiner.Automation;
-    using Skyline.DataMiner.Core.DataMinerSystem.Automation;
-    using Skyline.DataMiner.Utils.InteractiveAutomationScript;
+	using System;
+	using System.Linq;
 
-    public class DropDownFilterDialog : Dialog
-    {
-        private readonly DropDown elementDropDown;
-        private readonly Button exitButton;
+	using Skyline.DataMiner.Automation;
+	using Skyline.DataMiner.Core.DataMinerSystem.Automation;
+	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
-        public DropDownFilterDialog(IEngine engine) : base(engine)
-        {
-            Title = "Select an Element";
+	public class DropDownFilterDialog : Dialog
+	{
+		private readonly DropDown elementDropDown;
 
-            // Set up dropdown
-            var dms = engine.GetDms();
-            elementDropDown = new DropDown(dms.GetElements().Select(x => x.Name))
-            {
-                IsDisplayFilterShown = true, // Allows user to filter in dropdown options
-                IsSorted = true, // Sorts the options alphabetically
-            };
+		private readonly Button exitButton;
 
-            elementDropDown.Changed += (s, e) => OnElementSelected?.Invoke(this, new ElementSelectedEventArgs(e.Selected));
+		public DropDownFilterDialog(IEngine engine) : base(engine)
+		{
+			Title = "Select an Element";
 
-            // Set up exit button
-            exitButton = new Button("Exit");
-            exitButton.Pressed += (s, e) => OnExitButtonPressed?.Invoke(this, EventArgs.Empty);
+			// Set up dropdown
+			var dms = engine.GetDms();
+			elementDropDown = new DropDown(dms.GetElements().Select(x => x.Name))
+			{
+				IsDisplayFilterShown = true, // Allows user to filter in dropdown options
+				IsSorted = true, // Sorts the options alphabetically
+			};
 
-            // Generate Ui
-            AddWidget(new Label("Hint: you can type in the dropdown to filter options"), 0, 0);
-            AddWidget(elementDropDown, 1, 0);
-            AddWidget(exitButton, 2, 0);
-        }
+			elementDropDown.Changed += (s, e) => OnElementSelected?.Invoke(this, new ElementSelectedEventArgs(e.Selected));
 
-        public event EventHandler<ElementSelectedEventArgs> OnElementSelected;
+			// Set up exit button
+			exitButton = new Button("Exit");
+			exitButton.Pressed += (s, e) => OnExitButtonPressed?.Invoke(this, EventArgs.Empty);
 
-        public event EventHandler OnExitButtonPressed;
-    }
+			// Generate Ui
+			AddWidget(new Label("Hint: you can type in the dropdown to filter options"), 0, 0);
+			AddWidget(elementDropDown, 1, 0);
+			AddWidget(exitButton, 2, 0);
+		}
+
+		public event EventHandler<ElementSelectedEventArgs> OnElementSelected;
+
+		public event EventHandler OnExitButtonPressed;
+	}
 }
