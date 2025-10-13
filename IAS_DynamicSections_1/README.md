@@ -4,6 +4,8 @@
 
 This automation script is a demo of how to build an interactive script supporting manipulation of sections implementing the Model-View-Presenter principal.
 
+![DynamicSections](https://github.com/user-attachments/assets/7e7f97e4-63e0-4593-85f2-7ea448effa5a)
+
 ### About DataMiner
 
 DataMiner is a transformational platform that provides vendor-independent control and monitoring of devices and services. Out of the box and by design, it addresses key challenges such as security, complexity, multi-cloud, and much more. It has a pronounced open architecture and powerful capabilities enabling users to evolve easily and continuously.
