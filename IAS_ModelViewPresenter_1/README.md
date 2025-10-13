@@ -4,6 +4,8 @@
 
 This automation script is a demo of how to build an interactive script following the Model-View-Presenter principal.
 
+![Model-View-Presenter](https://github.com/user-attachments/assets/80633f74-e722-424c-9677-9a0f89ff7452)
+
 ### About DataMiner
 
 DataMiner is a transformational platform that provides vendor-independent control and monitoring of devices and services. Out of the box and by design, it addresses key challenges such as security, complexity, multi-cloud, and much more. It has a pronounced open architecture and powerful capabilities enabling users to evolve easily and continuously.
