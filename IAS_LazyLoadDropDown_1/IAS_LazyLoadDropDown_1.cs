@@ -124,7 +124,7 @@ namespace IAS_LazyLoadDropDown_1
 
 		public LazyLoadDropDownDialog(IEngine engine) : base(engine)
 		{
-			Title = "FilterChange Test";
+			Title = "LazyLoading DropDown";
 
 			options = GenerateOptions();
 
