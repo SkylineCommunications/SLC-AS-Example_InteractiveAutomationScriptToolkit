@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.33502.453
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11205.157 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Internal", "Internal", "{688CCE60-1F17-4E28-A870-1893905852AE}"
 	ProjectSection(SolutionItems) = preProject
@@ -88,6 +88,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{09B0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAS_DynamicSections_1", "IAS_DynamicSections_1\IAS_DynamicSections_1.csproj", "{FD26AECC-E61D-54D0-4447-B2D56A9DBDDD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IAS_LazyLoadDropDown", "IAS_LazyLoadDropDown", "{F6CE8AB7-142A-4B31-B34B-11E57FFB80AF}"
+	ProjectSection(SolutionItems) = preProject
+		IAS_LazyLoadDropDown.xml = IAS_LazyLoadDropDown.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{10E972F1-6955-4212-B742-DD1C376176A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAS_LazyLoadDropDown_1", "IAS_LazyLoadDropDown_1\IAS_LazyLoadDropDown_1.csproj", "{1CF4EE68-9213-61E4-F5D1-F8243BB7DC4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +127,10 @@ Global
 		{FD26AECC-E61D-54D0-4447-B2D56A9DBDDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD26AECC-E61D-54D0-4447-B2D56A9DBDDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD26AECC-E61D-54D0-4447-B2D56A9DBDDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CF4EE68-9213-61E4-F5D1-F8243BB7DC4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CF4EE68-9213-61E4-F5D1-F8243BB7DC4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CF4EE68-9213-61E4-F5D1-F8243BB7DC4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CF4EE68-9213-61E4-F5D1-F8243BB7DC4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,6 +156,9 @@ Global
 		{E1146D40-4840-4010-B036-1C9AC925958B} = {A81CCA8A-5280-4798-9442-62C6C68CAD61}
 		{09B0A52A-99AA-4DD7-A979-5939CE909967} = {E1146D40-4840-4010-B036-1C9AC925958B}
 		{FD26AECC-E61D-54D0-4447-B2D56A9DBDDD} = {09B0A52A-99AA-4DD7-A979-5939CE909967}
+		{F6CE8AB7-142A-4B31-B34B-11E57FFB80AF} = {A81CCA8A-5280-4798-9442-62C6C68CAD61}
+		{10E972F1-6955-4212-B742-DD1C376176A3} = {F6CE8AB7-142A-4B31-B34B-11E57FFB80AF}
+		{1CF4EE68-9213-61E4-F5D1-F8243BB7DC4E} = {10E972F1-6955-4212-B742-DD1C376176A3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D10F5189-03D7-4B39-86D5-220E1112B68C}
