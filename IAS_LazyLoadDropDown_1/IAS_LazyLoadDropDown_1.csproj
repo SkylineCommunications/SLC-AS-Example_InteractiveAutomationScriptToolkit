@@ -1,29 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
-    <Company>Skyline Communications</Company>
-    <Copyright>© Skyline Communications</Copyright>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
-    <CodeAnalysisRuleSet>..\Internal\Code Analysis\qaction-debug.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <CodeAnalysisRuleSet>..\Internal\Code Analysis\qaction-release.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup>
-    <DefineConstants>$(DefineConstants);DCFv1;DBInfo;ALARM_SQUASHING</DefineConstants>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Skyline.DataMiner.Dev.Automation" Version="10.5.12.1" />
-    <PackageReference Include="Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit" Version="10.5.8.1-prerelease.1" />
-    <PackageReference Include="Skyline.DataMiner.Utils.SecureCoding.Analyzers" Version="2.2.1" />
-  </ItemGroup>
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties DisLinkedXmlFile="..\IAS_LazyLoadDropDown.xml" DisProjectType="automationScriptProject" DisLinkId="1" />
-    </VisualStudio>
-  </ProjectExtensions>
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+        <Company>Skyline Communications</Company>
+        <Copyright>© Skyline Communications</Copyright>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugType>full</DebugType>
+        <CodeAnalysisRuleSet>..\Internal\Code Analysis\qaction-debug.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>pdbonly</DebugType>
+        <CodeAnalysisRuleSet>..\Internal\Code Analysis\qaction-release.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <PropertyGroup>
+        <DefineConstants>$(DefineConstants);DCFv1;DBInfo;ALARM_SQUASHING</DefineConstants>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Skyline.DataMiner.Dev.Automation" Version="10.5.12.1" />
+        <PackageReference Include="Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit" Version="10.5.8.1" />
+        <PackageReference Include="Skyline.DataMiner.Utils.SecureCoding.Analyzers" Version="2.2.1" />
+    </ItemGroup>
+    <ProjectExtensions>
+        <VisualStudio>
+            <UserProperties DisLinkedXmlFile="..\IAS_LazyLoadDropDown.xml" DisProjectType="automationScriptProject" DisLinkId="1" />
+        </VisualStudio>
+    </ProjectExtensions>
 </Project>

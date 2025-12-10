@@ -129,10 +129,12 @@ namespace IAS_LazyLoadDropDown_1
 			options = GenerateOptions();
 
 			DropDown.Options = options.Take(50);
-			DropDown.ValidationText = "Not all options are displayed, please use the filter to narrow down.";
-			DropDown.ValidationState = UIValidationState.Invalid; // Using the validation state to convey to the user that not all options are shown
 			DropDown.Changed += DropDown_Changed;
 			DropDown.FilterChanged += DropDown_FilterChanged;
+
+			// Optional workaround: Using the DropDown validation state here to convey to the user that not all options are shown
+			DropDown.ValidationText = "Not all options are displayed, please use the filter to narrow down.";
+			DropDown.ValidationState = UIValidationState.Invalid;
 
 			OkButton.Pressed += (sender, args) => engine.ExitSuccess("OK");
 
@@ -162,18 +164,10 @@ namespace IAS_LazyLoadDropDown_1
 
 		private void DropDown_FilterChanged(object sender, DropDownBase.DropDownFilterChangedEventArgs e)
 		{
+			// Use the currently entered filter value to filter the options
+			// NOTE: you are not able to change the selected item of the DropDown firing this event, as this breaks the filtering behavior and as such is blocked by the toolkit.
 			var filteredOptions = options.Where(x => x.IndexOf(e.FilterValue ?? String.Empty, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-			var limitedOptions = filteredOptions.Take(50).ToList();
-			var selectedOption = DropDown.Selected;
-			if (!limitedOptions.Contains(selectedOption))
-			{
-				// Selected option does not match filter => update selected option to be valid
-				selectedOption = limitedOptions.FirstOrDefault();
-			}
-
-			DropDown.Options = limitedOptions; // Limit visible options to first 50 matches
-			DropDown.Selected = selectedOption;
-
+			DropDown.Options = filteredOptions.Take(50);
 			DropDown.ValidationState = filteredOptions.Count > 50 ? UIValidationState.Invalid : UIValidationState.Valid;
 		}
 
@@ -181,6 +175,11 @@ namespace IAS_LazyLoadDropDown_1
 		{
 			// Clear validation state when user makes a selection
 			DropDown.ValidationState = UIValidationState.Valid;
+
+			// Optional: add another couple of options next the selected one in case the filter caused only a few options to be shown
+			var filteredOptions = options.Take(50).ToHashSet();
+			filteredOptions.Add(DropDown.Selected);
+			DropDown.Options = filteredOptions;
 		}
 	}
 }
