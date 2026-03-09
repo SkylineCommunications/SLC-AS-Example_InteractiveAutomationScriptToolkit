@@ -4,7 +4,7 @@
 
 This automation script showcases how to create a lazy-loaded dropdown in a DataMiner User Interface (UI). Lazy loading is a technique that loads data only when it is needed, which can improve performance and reduce initial load times.
 
-![LazyLoadingDropDown](https://github.com/user-attachments/assets/a0bde06e-4233-4e6d-9472-c33f8055d053)
+![LazyLoadingDropDown gif](https://github.com/user-attachments/assets/d2998bc6-0959-4606-90ce-616fcd0b532a)
 
 ### About DataMiner
 
