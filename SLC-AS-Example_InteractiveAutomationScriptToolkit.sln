@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11205.157 d18.0
+VisualStudioVersion = 18.0.11205.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Internal", "Internal", "{688CCE60-1F17-4E28-A870-1893905852AE}"
 	ProjectSection(SolutionItems) = preProject
@@ -97,6 +97,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{10E9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAS_LazyLoadDropDown_1", "IAS_LazyLoadDropDown_1\IAS_LazyLoadDropDown_1.csproj", "{1CF4EE68-9213-61E4-F5D1-F8243BB7DC4E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IAS_Widgets_Demo", "IAS_Widgets_Demo", "{59855FB0-A616-493B-88A4-AA0E1C85D460}"
+	ProjectSection(SolutionItems) = preProject
+		IAS_Widgets_Demo.xml = IAS_Widgets_Demo.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{A7EF3BEA-4812-4764-9052-232F218AF7D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAS_Widgets_Demo_1", "IAS_Widgets_Demo_1\IAS_Widgets_Demo_1.csproj", "{71E167D6-5410-BFC0-C312-4471944A3186}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +140,10 @@ Global
 		{1CF4EE68-9213-61E4-F5D1-F8243BB7DC4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CF4EE68-9213-61E4-F5D1-F8243BB7DC4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CF4EE68-9213-61E4-F5D1-F8243BB7DC4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71E167D6-5410-BFC0-C312-4471944A3186}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71E167D6-5410-BFC0-C312-4471944A3186}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71E167D6-5410-BFC0-C312-4471944A3186}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71E167D6-5410-BFC0-C312-4471944A3186}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -159,6 +172,9 @@ Global
 		{F6CE8AB7-142A-4B31-B34B-11E57FFB80AF} = {A81CCA8A-5280-4798-9442-62C6C68CAD61}
 		{10E972F1-6955-4212-B742-DD1C376176A3} = {F6CE8AB7-142A-4B31-B34B-11E57FFB80AF}
 		{1CF4EE68-9213-61E4-F5D1-F8243BB7DC4E} = {10E972F1-6955-4212-B742-DD1C376176A3}
+		{59855FB0-A616-493B-88A4-AA0E1C85D460} = {A81CCA8A-5280-4798-9442-62C6C68CAD61}
+		{A7EF3BEA-4812-4764-9052-232F218AF7D4} = {59855FB0-A616-493B-88A4-AA0E1C85D460}
+		{71E167D6-5410-BFC0-C312-4471944A3186} = {A7EF3BEA-4812-4764-9052-232F218AF7D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D10F5189-03D7-4B39-86D5-220E1112B68C}
