@@ -4,6 +4,8 @@
 
 This automation script is a demo script containing the most common widgets used in DataMiner interactive scripts.
 
+<img width="405" height="997" alt="image" src="https://github.com/user-attachments/assets/02c2a699-70d5-4c17-8727-868599cecc04" />
+
 ### About DataMiner
 
 DataMiner is a transformational platform that provides vendor-independent control and monitoring of devices and services. Out of the box and by design, it addresses key challenges such as security, complexity, multi-cloud, and much more. It has a pronounced open architecture and powerful capabilities enabling users to evolve easily and continuously.
